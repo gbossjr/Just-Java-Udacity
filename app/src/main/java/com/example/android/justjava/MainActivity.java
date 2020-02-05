@@ -12,6 +12,7 @@ package com.example.android.justjava;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -46,7 +47,10 @@ public class MainActivity extends AppCompatActivity {
         CheckBox chocolateClicked = findViewById(R.id.checkBox3);
         boolean chocChecked = chocolateClicked.isChecked();
 
-        displayMessage(createOrderSummary(3, hasWhippedCream, chocChecked));
+        EditText nameInfo = findViewById(R.id.nameInput);
+        String nameOnOrder = nameInfo.getText().toString();
+
+        displayMessage(createOrderSummary(3, hasWhippedCream, chocChecked, nameOnOrder));
 
     }
 
@@ -91,8 +95,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private String createOrderSummary(int price, boolean hasWhippedCream, boolean Chocolate){
-        return  "Name: Geoffrey Bosire\n"  +
+    private String createOrderSummary(int price, boolean hasWhippedCream, boolean Chocolate, String name){
+        return  "Name: " + name + "\n" +
                 "Add Whipped Cream? " + hasWhippedCream + "\n" +
                 "Add Whipped Cream? " + Chocolate + "\n" +
                 "Quantity: " + quantity + "\n" +
