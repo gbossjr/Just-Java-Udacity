@@ -9,11 +9,13 @@
 package com.example.android.justjava;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -76,11 +78,29 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void increment(View view) {
+        if (quantity == 100){
+            Context context = getApplicationContext();
+            CharSequence text = "You Cannot Order More than 100 Cups of Coffee";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+            return;
+        }
         quantity = quantity + 1;
         displayQuantity(quantity);
     }
 
     public void decrement(View view) {
+        if (quantity <= 0){
+            Context context = getApplicationContext();
+            CharSequence text = "Increase Quantity";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+            return;
+        }
         quantity = quantity - 1 ;
         displayQuantity(quantity);
     }
