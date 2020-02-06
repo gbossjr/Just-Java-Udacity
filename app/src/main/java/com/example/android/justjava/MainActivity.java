@@ -50,7 +50,9 @@ public class MainActivity extends AppCompatActivity {
         EditText nameInfo = findViewById(R.id.nameInput);
         String nameOnOrder = nameInfo.getText().toString();
 
-        displayMessage(createOrderSummary(3, hasWhippedCream, chocChecked, nameOnOrder));
+        int price = calculatePrice(hasWhippedCream, chocChecked);
+
+        displayMessage(createOrderSummary(price, hasWhippedCream, chocChecked, nameOnOrder));
 
     }
 
@@ -59,9 +61,17 @@ public class MainActivity extends AppCompatActivity {
      *
      * //@param quant is the number of cups of coffee ordered
      */
-    private int calculatePrice() {
-        int price = quantity * 5;
-        return price;
+    private int calculatePrice(boolean whipped, boolean Chocolate) {
+        int basePrice = 5;
+
+        if (whipped){
+            basePrice += 1;
+        }
+
+        if (Chocolate){
+            basePrice += 2;
+        }
+        return basePrice * quantity;
     }
 
 
@@ -100,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
                 "Add Whipped Cream? " + hasWhippedCream + "\n" +
                 "Add Whipped Cream? " + Chocolate + "\n" +
                 "Quantity: " + quantity + "\n" +
-                "Total: " + (quantity * 5) + "\n" +
+                "Total: " + price + "\n" +
                 "Thank you!";
     }
 
