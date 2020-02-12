@@ -10,6 +10,8 @@ package com.example.android.justjava;
 
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
@@ -36,13 +38,6 @@ public class MainActivity extends AppCompatActivity {
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
-        //int price = quantity * 5;
-        //String priceMessage = "Total: $" +price + "\nThank you!";
-        //displayMessage(priceMessage);
-        //int newPrice = calculatePrice();
-        //displayPrice(newPrice);
-
-
         CheckBox onClickWhipped = findViewById(R.id.checkBox2);
         boolean  hasWhippedCream = onClickWhipped.isChecked();
 
@@ -54,7 +49,17 @@ public class MainActivity extends AppCompatActivity {
 
         int price = calculatePrice(hasWhippedCream, chocChecked);
 
-        displayMessage(createOrderSummary(price, hasWhippedCream, chocChecked, nameOnOrder));
+        String order = createOrderSummary(nameOnOrder, price, hasWhippedCream, chocChecked);
+
+        displayMessage(order);
+
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:")); // only email apps should handle this
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Just Java Order for" + nameOnOrder);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+
 
     }
 
@@ -125,13 +130,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private String createOrderSummary(int price, boolean hasWhippedCream, boolean Chocolate, String name){
-        return  "Name: " + name + "\n" +
-                "Add Whipped Cream? " + hasWhippedCream + "\n" +
-                "Add Whipped Cream? " + Chocolate + "\n" +
-                "Quantity: " + quantity + "\n" +
-                "Total: " + price + "\n" +
-                "Thank you!";
+    private String createOrderSummary(String name, int price, boolean hasWhippedCream, boolean Chocolate){
+        String template = "Name: " + name;
+        template += "\nAdd whipped Cream? " +hasWhippedCream;
+        template += "\nAdd Chocolate? " + Chocolate;
+        template += "\nQuantity: " + quantity;
+        template += "\nTotal: $" + price;
+        template += "\nThank You";
+        return  template;
     }
 
 }
