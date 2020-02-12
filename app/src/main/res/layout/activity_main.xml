@@ -21,12 +21,10 @@
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:layout_marginTop="16dp"
             android:text="Toppings"
-            android:textAllCaps="true" />
+            style="@style/Udacity"/>
 
 
         <CheckBox
@@ -47,12 +45,10 @@
 
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:text="Quantity"
-            android:textAllCaps="true" />
+            style="@style/Udacity" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -86,11 +82,9 @@
 
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:text="Order Summary"
-            android:textAllCaps="true" />
+            style="@style/Udacity" />
 
         <TextView
             android:id="@+id/order_summary_text_view"
